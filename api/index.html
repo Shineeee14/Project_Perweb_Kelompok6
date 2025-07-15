@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Perpustakaan Desa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef1f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #0077cc;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .nav-toggle {
+      display: flex;
+      justify-content: center;
+      background-color: #f4f4f4;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-toggle button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #ddd;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background-color 0.2s ease;
+    }
+
+    .nav-toggle button.active {
+      background-color: #0077cc;
+      color: white;
+    }
+
+    .content {
+      padding: 0;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 160px); /* header + toggle */
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Selamat Datang di Perpustakaan Desa</h1>
+  </header>
+
+  <div class="nav-toggle">
+    <button id="btnBuku" class="active">📚 Buku</button>
+    <button id="btnKomentar">💬 Komentar</button>
+    <button id="btnKontak">📩 Kontak</button>
+  </div>
+
+  <div class="content">
+    <iframe id="mainFrame" src="read_book_display.php"></iframe>
+  </div>
+
+  <script>
+    const btnBuku = document.getElementById('btnBuku');
+    const btnKomentar = document.getElementById('btnKomentar');
+    const btnKontak = document.getElementById('btnKontak');
+    const frame = document.getElementById('mainFrame');
+
+    function setActiveButton(activeBtn) {
+      [btnBuku, btnKomentar, btnKontak].forEach(btn => {
+        btn.classList.remove('active');
+      });
+      activeBtn.classList.add('active');
+    }
+
+    btnBuku.addEventListener('click', () => {
+      frame.src = 'read_book_display.php';
+      setActiveButton(btnBuku);
+    });
+
+    btnKomentar.addEventListener('click', () => {
+      frame.src = 'read_comment_display.php';
+      setActiveButton(btnKomentar);
+    });
+
+    btnKontak.addEventListener('click', () => {
+      frame.src = 'read_contact_display.php';
+      setActiveButton(btnKontak);
+    });
+  </script>
+
+</body>
+</html>

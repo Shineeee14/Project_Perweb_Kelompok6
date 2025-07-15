@@ -1,0 +1,118 @@
+.page.contact-page {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form label {
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-form button {
+  background-color: #ec407a;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.contact-form button:hover {
+  background-color: #d81b60;
+}
+
+.contact-illustration {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-illustration img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* LIST PESAN MASUK */
+.contact-list {
+  margin-top: 2rem;
+}
+
+.contact-item {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.contact-item p {
+  margin: 0.5rem 0;
+}
+
+.contact-item button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.contact-item button:first-of-type {
+  background-color: #1976d2;
+  color: white;
+}
+
+.contact-item button:last-of-type {
+  background-color: #e53935;
+  color: white;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-illustration {
+    margin-top: 1rem;
+  }
+}
