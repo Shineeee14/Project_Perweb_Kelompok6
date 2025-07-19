@@ -65,16 +65,17 @@ const Menu = () => {
 
     try {
       const result = await addBook(formData);
-      if (result.success) {
-        setBookList([...bookList, {
-          ...newBook,
-          id: result.id,
-          image: result.imageUrl
-        }]);
-        resetForm();
-      } else {
-        alert('Gagal menambahkan buku');
-      }
+        if (result.success) {
+          setBookList([...bookList, {
+            ...newBook,
+            id: result.id,
+            image: `http://localhost/Project_Perweb_Kelompok6-main/api/uploads/${result.imageUrl}`
+          }]);
+          resetForm();
+          alert('Input berhasil ditambahkan');
+        } else {
+          alert('Gagal menambahkan buku');
+        }
     } catch (err) {
       console.error(err);
     }
@@ -100,21 +101,24 @@ const Menu = () => {
 
     try {
       const result = await updateBook(formData);
-      if (result.success) {
-        const updated = bookList.map((b) =>
-          b.id === isEditingId
-            ? {
-                ...newBook,
-                id: isEditingId,
-                image: result.imageUrl || b.image,
-              }
-            : b
-        );
-        setBookList(updated);
-        resetForm();
-      } else {
-        alert('Gagal update buku');
-      }
+        if (result.success) {
+          const updated = bookList.map((b) =>
+            b.id === isEditingId
+              ? {
+                  ...newBook,
+                  id: isEditingId,
+                  image: result.imageUrl
+                    ? `http://localhost/Project_Perweb_Kelompok6-main/api/uploads/${result.imageUrl}`
+                    : b.image,
+                }
+              : b
+          );
+          setBookList(updated);
+          resetForm();
+          alert('Input berhasil diupdate');
+        } else {
+          alert('Gagal update buku');
+        }
     } catch (err) {
       console.error(err);
     }
@@ -137,11 +141,12 @@ const Menu = () => {
     <div className="page" style={{ backgroundColor: '#fce4ec' }}>
       <h1 style={{ textAlign: 'center', color: '#2c3e50' }}>Katalog Buku</h1>
 
-      <div className="product-grid">
+      {/* Tampilan daftar buku dihilangkan sesuai permintaan */}
+      {/* <div className="product-grid">
         {bookList.map((book) => (
           <ProductCard key={book.id} book={book} />
         ))}
-      </div>
+      </div> */}
 
       <div style={{ textAlign: 'center', margin: '2rem 0' }}>
         <button
@@ -220,33 +225,34 @@ const Menu = () => {
             </button>
           </form>
 
-        <div className="book-grid">
-          {bookList.map((book) => (
-            <div key={book.id} className="book-card">
-              <img
-                src={
-                  book.image?.startsWith('http')
-                    ? book.image
-                    : `http://localhost/Project_Perweb_Kelompok6-main/api/uploads/${book.image}`
-                }
-                alt={book.title}
-                className="book-image"
-              />
+       <div className="book-grid">
+  {bookList.map((book) => (
+    <div key={book.id} className="book-card">
+      <img
+        src={
+          book.image?.startsWith('http')
+            ? book.image
+            : `http://localhost/Project_Perweb_Kelompok6-main/api/uploads/${book.image}`
+        }
+        alt={book.title}
+        className="book-image"
+      />
 
-              <div className="book-info">
-                <h3 className="book-title">{book.title}</h3>
-                <p><strong>Penulis:</strong> {book.author}</p>
-                <p><strong>Tahun:</strong> {book.year}</p>
-                <p className="desc">{book.description}</p>
-              </div>
+      <div className="book-info">
+        <h3 className="book-title">{book.title}</h3>
+        <p><strong>Penulis:</strong> {book.author}</p>
+        <p><strong>Tahun:</strong> {book.year}</p>
+        <p className="desc">{book.description}</p>
+      </div>
 
-              <div className="action-buttons">
-                <button onClick={() => handleEdit(book.id)} className="btn-edit">✏️ Edit</button>
-                <button onClick={() => handleDelete(book.id)} className="btn-delete">🗑️ Hapus</button>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="action-buttons">
+        <button onClick={() => handleEdit(book.id)} className="btn-edit">✏️ Edit</button>
+        <button onClick={() => handleDelete(book.id)} className="btn-delete">🗑️ Hapus</button>
+      </div>
+    </div>
+  ))}
+</div>
+
         </div>
       )}
     </div>

@@ -1,72 +1,57 @@
 <?php
-// Koneksi ke database
 include 'koneksi.php';
 
-// Query untuk mengambil data buku dan deskripsi
-$query = "SELECT book.id, title, author, year, image, description 
-          FROM book 
-          JOIN deskripsi_book ON book.id = deskripsi_book.book_id 
-          ORDER BY book.id DESC";
-
+// Ambil data buku beserta deskripsi dari tabel deskripsi_book
+$query = "
+    SELECT book.*, deskripsi_book.description 
+    FROM book 
+    LEFT JOIN deskripsi_book ON book.id = deskripsi_book.book_id 
+    ORDER BY book.id DESC
+";
 $result = $conn->query($query);
 $books = [];
-
 while ($row = $result->fetch_assoc()) {
-  $books[] = $row;
+    $books[] = $row;
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <title>Daftar Buku</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #fce4ec;
       margin: 0;
       padding: 20px;
     }
     h1 {
       text-align: center;
-      color: #333;
+      color: #2c3e50;
     }
-    .book-container {
+    .book-grid {
       display: flex;
       flex-wrap: wrap;
+      gap: 20px;
       justify-content: center;
+      margin-top: 20px;
     }
     .book-card {
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
+      padding: 15px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      margin: 15px;
-      width: 300px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      max-width: 220px;
     }
     .book-card img {
       width: 100%;
       height: auto;
+      border-radius: 8px;
     }
-    .book-content {
-      padding: 15px;
-    }
-    .book-title {
-      font-size: 20px;
-      margin: 0 0 10px;
-      color: #0077cc;
-    }
-    .book-meta {
-      font-size: 14px;
-      color: #555;
-    }
-    .book-description {
+    .book-info {
       margin-top: 10px;
-      font-size: 14px;
-      color: #333;
     }
   </style>
 </head>
@@ -74,26 +59,18 @@ while ($row = $result->fetch_assoc()) {
 
 <h1>Daftar Buku</h1>
 
-<div class="book-container">
-  <?php if (count($books) > 0): ?>
-    <?php foreach ($books as $book): ?>
-      <div class="book-card">
-        <?php if (!empty($book['image'])): ?>
-          <img src="<?php echo htmlspecialchars($book['image']); ?>" alt="Cover Buku">
-        <?php endif; ?>
-        <div class="book-content">
-          <div class="book-title"><?php echo htmlspecialchars($book['title']); ?></div>
-          <div class="book-meta">
-            Penulis: <?php echo htmlspecialchars($book['author']); ?><br>
-            Tahun: <?php echo htmlspecialchars($book['year']); ?>
-          </div>
-          <div class="book-description"><?php echo nl2br(htmlspecialchars($book['description'])); ?></div>
-        </div>
+<div class="book-grid">
+  <?php foreach ($books as $book): ?>
+    <div class="book-card">
+      <img src="uploads/<?php echo htmlspecialchars($book['image']); ?>" alt="Gambar Buku">
+      <div class="book-info">
+        <h3><?php echo htmlspecialchars($book['title']); ?></h3>
+        <p><strong>Penulis:</strong> <?php echo htmlspecialchars($book['author']); ?></p>
+        <p><strong>Tahun:</strong> <?php echo htmlspecialchars($book['year']); ?></p>
+        <p><?php echo nl2br(htmlspecialchars($book['description'] ?? '')); ?></p>
       </div>
-    <?php endforeach; ?>
-  <?php else: ?>
-    <p>Tidak ada buku yang ditemukan.</p>
-  <?php endif; ?>
+    </div>
+  <?php endforeach; ?>
 </div>
 
 </body>
