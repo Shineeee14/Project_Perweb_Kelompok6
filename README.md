@@ -1,5 +1,3 @@
-![link yutub ahmad](https://www.youtube.com/live/X2RD500CvgQ?si=AaF-yDi8QPD2JHXC)
+link backup vidio = https://drive.google.com/drive/folders/1wJYvHsHrOOomKfOzCxw9JknmXppnvWAx
 
-![link backup vidio](https://drive.google.com/drive/folders/1wJYvHsHrOOomKfOzCxw9JknmXppnvWAx)
-
-https://www.youtube.com/live/X2RD500CvgQ?si=AaF-yDi8QPD2JHXC
+Link youtube Ahmad = https://youtu.be/A9CcaKD3qa0?si=MUhN-GxKHf-UCygq
